@@ -1,0 +1,108 @@
+
+@media (min-width: 0) {
+    .g-mr-15 {
+        margin-right: 1.07143rem !important;
+    }
+}
+@media (min-width: 0){
+    .g-mt-3 {
+        margin-top: 0.21429rem !important;
+    }
+}
+
+.g-height-50 {
+    height: 50px;
+}
+
+.g-width-50 {
+    width: 50px !important;
+}
+
+@media (min-width: 0){
+    .g-pa-30 {
+        padding: 1.6rem !important;
+    }
+}
+
+.g-bg-secondary {
+    background-color: #fafafa;
+}
+.card-footer {
+    border-radius:10px;
+    box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.15);
+}
+.u-shadow-v18 {
+    border-radius:10px;
+    box-shadow: 0 10px 15px 2px rgba(0, 0, 0, 0.30);
+}
+
+.g-color-gray-dark-v4 {
+    color: #777 !important;
+}
+
+.g-font-size-12 {
+    font-size: 0.85714rem !important;
+}
+
+.media-comment {
+    margin-top:20px
+}
+
+/* apprating */
+
+.custom-text{
+    display: grid;
+}
+.rating {
+    display:grid;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+}
+.rows {
+
+    margin-left: 25px;
+    margin-top: 20px;
+    display:flex;
+    flex-direction: row;
+}
+.number {
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    border-radius: 80px;
+
+    display: table;
+    text-align:center;
+    margin: auto;
+}
+.number p {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 25px;
+    color: gold;
+} 
+.show {
+    display: table;
+    text-align:center;
+    margin: auto;
+    margin-left: 30px;
+}
+
+.show p {
+
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 22px;
+}
+
+.sugestion{
+    text-align: center;
+    font-size: 18px;
+}
+
+.sugestion p {
+    padding-top: 20px;
+}
