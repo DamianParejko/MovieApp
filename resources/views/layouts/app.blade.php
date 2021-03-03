@@ -36,7 +36,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-               
+                
                 @livewire('search-movies')
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -93,9 +93,9 @@
         <main class="py-4">
             @section('content')
             @show
-            @livewireScripts
         </main>
     </div>
+    @livewireScripts
 </body>
 </html>
 
@@ -105,5 +105,4 @@ function btn(e) {
         $.get('/markAsRead');   
     }
 }
-
 </script>

@@ -11,7 +11,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             @endif
-            </div>
+        </div>
         
         <div class='form-group' style="margin-top:40px; position:absolute; z-index: 8;">
             @if(count($searchResult))

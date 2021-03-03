@@ -37450,55 +37450,53 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", [
-        Number.isInteger(_vm.currentRating) &&
-        !Number.isInteger(_vm.currentSelectedRating)
-          ? _c("div", { staticClass: "content" }, [
-              _c("div", { staticClass: "rows" }, [
-                _c("div", { staticClass: "number" }, [
-                  _c("p", [_vm._v(_vm._s(_vm.currentRating))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "show" }, [
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.items[_vm.currentRating - 1]) + " ")
-                  ])
+      Number.isInteger(_vm.currentRating) &&
+      !Number.isInteger(_vm.currentSelectedRating)
+        ? _c("div", { staticClass: "content" }, [
+            _c("div", { staticClass: "rows" }, [
+              _c("div", { staticClass: "number" }, [
+                _c("p", [_vm._v(_vm._s(_vm.currentRating))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "show" }, [
+                _c("p", [
+                  _vm._v(" " + _vm._s(_vm.items[_vm.currentRating - 1]) + " ")
                 ])
               ])
             ])
-          : _vm._e(),
-        _vm._v(" "),
-        Number.isInteger(_vm.currentSelectedRating)
-          ? _c("div", { staticClass: "content" }, [
-              _c("div", { staticClass: "rows" }, [
-                _c("div", { staticClass: "number" }, [
-                  _c("p", [_vm._v(_vm._s(_vm.currentSelectedRating))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "show" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-dark btn-sm btn-block",
-                      staticStyle: { width: "150px" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.selectRating($event)
-                        }
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      Number.isInteger(_vm.currentSelectedRating)
+        ? _c("div", { staticClass: "content" }, [
+            _c("div", { staticClass: "rows" }, [
+              _c("div", { staticClass: "number" }, [
+                _c("p", [_vm._v(_vm._s(_vm.currentSelectedRating))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "show" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-dark btn-sm btn-block",
+                    staticStyle: { width: "150px" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.selectRating($event)
                       }
-                    },
-                    [
-                      _vm._v(
-                        "\n                           Oceń\n                       "
-                      )
-                    ]
-                  )
-                ])
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                           Oceń\n                       "
+                    )
+                  ]
+                )
               ])
             ])
-          : _vm._e()
-      ])
+          ])
+        : _vm._e()
     ]
   )
 }

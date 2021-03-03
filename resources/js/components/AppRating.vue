@@ -16,7 +16,7 @@
         </star-rating>
        
     </div>
-    <div>
+
         <div v-if="Number.isInteger(currentRating) && !Number.isInteger(currentSelectedRating)" class="content">   
            <div class="rows"> 
                 <div class="number">
@@ -39,10 +39,10 @@
                 </div>
             </div>
              </div>
-    </div>
+
     
     
-</div>  
+</div>
 </template>
 
 <script>
