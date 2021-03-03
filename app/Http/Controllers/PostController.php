@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Movie;
 use App\Models\Comment;
 use App\Jobs\CreatePost;
+use App\Jobs\DeletePost;
+use App\Jobs\UpdatePost;
 use App\Policies\UserPolicy;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
@@ -15,18 +17,15 @@ use Illuminate\Auth\Middleware\Authenticate;
 
 class PostController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware([Authenticate::class], ['except' => ['show']]);
     }   
 
     public function store(PostRequest $request, Movie $movie)
-    {
-        Post::create([
-            'user_id' => Auth::user()->id,
-            'movie_id' => $movie->id,
-            'content' => $request->content,    
-        ]);      
-      
+    {  
+        $this->dispatchNow(new CreatePost($request->content, $movie));
+        
         return redirect()->back()->with('message', 'Komentarz został dodany');
     }
 
@@ -49,15 +48,17 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $this->authorize('edit', $post);
-        $post->update($request->only('content'));
-        
+
+        $this->dispatchNow(new UpdatePost($post, $request->content));
+
         return redirect()->route('movie.show', ['movie' => $post->movie_id])->with('message', 'Zmiany zostały zapisane');
     }
 
     public function destroy(Post $post)
     {   
         $this->authorize('delete', $post);
-        $post->delete();
+        
+        $this->dispatchNow(new DeletePost($post));
         
         return redirect()->route('movie.show', ['movie' => $post->movie_id])->with('message', 'Komentarz został usunięty');
     }
