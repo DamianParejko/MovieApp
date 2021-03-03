@@ -22,16 +22,8 @@ class UpdatePost implements ShouldQueue
     public function __construct(Post $post, string $content)
     {
         $this->post = $post;
-        //$this->receiver = Arr::only($receiver, ['content']);
         $this->content = $content;
     }
-
-    // public static function fromRequest(Post $post, PostRequest $request)
-    // {
-    //     return new static($post, [
-    //         'content' => $request->content
-    //     ]);
-    // }
 
     public function handle()
     {
