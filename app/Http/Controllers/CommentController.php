@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Jobs\CreateComment;
+use App\Jobs\DeleteComment;
+use App\Jobs\UpdateComment;
 use Illuminate\Http\Request;
 use App\Events\CommentCreated;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
+use App\Notifications\NotificationComment;
 use App\Http\Requests\StoreCommentsRequest;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Notifications\DatabaseNotification;
 
 class CommentController extends Controller
 {
@@ -22,14 +27,8 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request, Post $post)
     {
-        Comment::create([
-            'user_id' => Auth::user()->id,
-            'post_id' => $post->id,
-            'comment' => $request->comment
-        ]); 
-        
-        event(new CommentCreated($post));
-        
+        $this->dispatchNow(new CreateComment($request->commentary, $post));
+            
         return redirect()->back()->with('message', 'Komentarz dodany');
     }
 
@@ -43,7 +42,8 @@ class CommentController extends Controller
     public function update(CommentRequest $request, Comment $comment)
     {
         $this->authorize('edit', $comment);
-        $comment->update($request->only('comment'));
+        
+        $this->dispatchNow(new UpdateComment($comment, $request->commentary));
 
         return redirect()->route('post.show', ['post' => $comment->post_id]);
     }
@@ -52,14 +52,7 @@ class CommentController extends Controller
     {
         $this->authorize('delete', $comment);
 
-        $like = DB::table('notifications')
-            ->where('data->post->id', $comment->post_id)
-            ->where('created_at', $comment->created_at)
-            ->where('data->user->id', $comment->user_id)
-            ->where('type', 'App\Notifications\NotificationComment');
-        
-        $comment->delete();
-        $like->delete();
+        $this->dispatchNow(new DeleteComment($comment));
 
         return redirect()->back()->with('message', 'Komentarz usunięto');
     }
