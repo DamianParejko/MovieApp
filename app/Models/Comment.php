@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\LikeComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
@@ -56,5 +57,9 @@ class Comment extends Model
 
     public function countDislikeComment(){
         return $this->like_comment->where('likeable_id', -1)->count();
+    }
+
+    public function hasNotify(Comment $comment){
+        return DatabaseNotification::where('data->id', $comment->id);
     }
 }
