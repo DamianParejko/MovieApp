@@ -33,8 +33,7 @@ class PostController extends Controller
     {
         $comments = $post->comment()->paginate(10);
         
-        return view('post.show', compact('comments', 'post'));
-        
+        return view('post.show', compact('comments', 'post'));      
     }
 
     public function edit(Post $post)    
@@ -42,7 +41,6 @@ class PostController extends Controller
         $this->authorize('edit', $post);
         
         return view('post.edit', compact('post'));
-
     }
 
     public function update(PostRequest $request, Post $post)
