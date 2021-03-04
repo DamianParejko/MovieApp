@@ -11,8 +11,8 @@ class NotificationCommentCreated
 {
     public function handle($event)
     {
-        if($event->post->user_id != Auth::user()->id){
-            $event->post->user->notify(new NotificationComment($event->post));
+        if($event->comment->post->user_id != Auth::user()->id){
+            $event->comment->post->user->notify(new NotificationComment($event->comment));
         }
     }
 }

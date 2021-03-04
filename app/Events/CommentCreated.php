@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -15,11 +15,11 @@ class CommentCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $post;
+    public $comment;
 
-    public function __construct(Post $post)
+    public function __construct(Comment $comment)
     {
-        $this->post = $post;
+        $this->comment = $comment;
     }
 
     public function broadcastOn()

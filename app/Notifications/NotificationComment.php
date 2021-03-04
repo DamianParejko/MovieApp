@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notification;
@@ -11,11 +12,13 @@ use Illuminate\Notifications\Messages\MailMessage;
 class NotificationComment extends Notification
 {
     use Queueable;
-    protected $post;
-
-    public function __construct($post)
+    
+    protected $comment;
+    
+    public function __construct(Comment $comment)
     {
-        $this->post=$post;
+        $this->comment=$comment;
+
     }
 
     public function via($notifiable)
@@ -32,8 +35,9 @@ class NotificationComment extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'post'=>$this->post,
-            'user'=>auth()->user()
+            'id' => $this->comment->id,
+            'post' => $this->comment->post,
+            'user' => auth()->user()
         ];
     }
 
