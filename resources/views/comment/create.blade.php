@@ -7,7 +7,7 @@
                     <div class="form-row">
 
                         <div class="col-10"> 
-                            <input type="text" class="form-control" name='comment' placeholder="Komentarz">
+                            <input type="text" class="form-control" name='commentary' placeholder="Komentarz">
                         </div>
 
                         <div class="col-2">

@@ -21,7 +21,7 @@
                     @method('PUT')
                     @csrf
                     <div >
-                        <input class='card-footer' style='margin-bottom:5px;border-radius:5px;' name='comment' value="{{ $comment->comment }}">
+                        <input class='card-footer' style='margin-bottom:5px;border-radius:5px;' name='commentary' value="{{ $comment->comment }}">
                     </div>
                     <button class='btn btn-secondary' type='submit'>Zapisz</button>
                     <a href="{{ route('post.show', ['post'=>$comment->post_id]) }}" class='btn btn-primary'>Nie zapisuj</a>
