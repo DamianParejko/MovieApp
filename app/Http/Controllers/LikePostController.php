@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Events\PostLikeCreated;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\NotificationPostLike;
+use App\Jobs\CreateLike;
+use App\Jobs\DeleteLike;
+use App\Jobs\CreateDislike;
 
 class LikePostController extends Controller
 {
@@ -17,45 +14,25 @@ class LikePostController extends Controller
 
         $this->authorize('like', $post);
 
-        if($post->hasLike($post) == 0){
-            $post->like_post()->create([
-                'user_id' => Auth::user()->id,
-                'post_id' => $post->id,
-                'likeable_id' => 1
-            ]);  
-        }
+        $this->dispatchNow(new CreateLike($post));
         
-        event(new PostLikeCreated($post));
-   
         return redirect()->back()->with('message', 'Zareagowałeś na post');
     }
 
     public function dislike(Post $post){
     
         $this->authorize('like', $post);
-        
-        if($post->hasLike($post) == 0){
-            $post->like_post()->create([
-                'user_id' => Auth::user()->id,
-                'post_id' => $post->id,
-                'likeable_id' => -1
-            ]);
-        }
-       
-        event(new PostLikeCreated($post));     
+
+        $this->dispatchNow(new CreateDislike($post));   
           
         return redirect()->back()->with('message', 'Zareagowałeś na post');
     }
 
-    public function destroy(Post $post, Request $request){
+    public function destroy(Post $post){
 
-        $notification = DB::table('notifications')
-            ->where('data->post->id', $post->id)
-            ->where('data->user->id', Auth::user()->id);
+        $this->authorize('destroy', $post);
 
-        $notification->delete();
-
-        $request->user()->like_post()->where('post_id', $post->id)->delete();
+        $this->dispatchNow(new DeleteLike($post));
 
         return redirect()->back()->with('message', 'Reakcja usunięta');
     }
