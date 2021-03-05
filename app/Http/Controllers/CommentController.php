@@ -3,18 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Comment;
 use App\Jobs\CreateComment;
 use App\Jobs\DeleteComment;
 use App\Jobs\UpdateComment;
 use Illuminate\Http\Request;
-use App\Events\CommentCreated;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
-use App\Notifications\NotificationComment;
-use App\Http\Requests\StoreCommentsRequest;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Notifications\DatabaseNotification;
 

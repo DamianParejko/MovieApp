@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Movie;
 use App\Models\Comment;
 use App\Jobs\CreatePost;
 use App\Jobs\DeletePost;
 use App\Jobs\UpdatePost;
-use App\Policies\UserPolicy;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Middleware\Authenticate;
 
