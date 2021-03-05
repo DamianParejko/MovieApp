@@ -31,16 +31,16 @@ class CreateLike implements ShouldQueue
      */
     public function handle()
     {
-        $like = new LikePost([
+        $likePost = new LikePost([
             'user_id' => Auth::user()->id,
             'post_id' => $this->post->id,
             'likeable_id' => 1
         ]);
 
-        $like->save();
+        $likePost->save();
 
-        event(new PostLikeCreated($this->post));
+        event(new PostLikeCreated($likePost));
 
-        return $like;
+        return $likePost;
     }
 }

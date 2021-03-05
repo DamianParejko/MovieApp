@@ -28,6 +28,8 @@ class DeleteLike implements ShouldQueue
      */
     public function handle()
     {
-        $this->post->hasLike($this->post)->first->delete();
+        $this->post->hasLike($this->post)->first()->delete();
+        
+        $this->post->hasNotify($this->post)->first()->delete();
     }
 }
