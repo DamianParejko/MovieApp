@@ -23,6 +23,11 @@
               @include('like.comment_deletelike')
           @endif
           @endcan
+
+          @cannot('like', $post)
+                @include('like.count_commentlike')
+          @endcannot
+
         </ul>  
       </div>
       @if($comment->user->image)

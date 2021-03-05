@@ -1,6 +1,6 @@
 
 <a class="btn btn-outline-dark">
-    {{$post->countLike() }} -- 
+    {{$post->countLike() }} - 
     <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
 </a>
 
@@ -14,5 +14,5 @@
 
 <a class="btn btn-outline-dark" >
     <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-     --  {{$post->countDislike() }}
+     -  {{$post->countDislike() }}
 </a>
