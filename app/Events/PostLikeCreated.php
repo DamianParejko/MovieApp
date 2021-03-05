@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Post;
+use App\Models\LikePost;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -15,11 +15,11 @@ class PostLikeCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $post;
+    public $likePost;
 
-    public function __construct(Post $post)
+    public function __construct(LikePost $likePost)
     {
-        $this->post = $post;
+        $this->likePost = $likePost;
     }
 
     public function broadcastOn()

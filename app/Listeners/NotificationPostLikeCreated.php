@@ -15,6 +15,6 @@ class NotificationPostLikeCreated
 
     public function handle($event)
     {
-        $event->post->user->notify(new NotificationPostLike($event->post));
+        $event->likePost->post->user->notify(new NotificationPostLike($event->likePost));
     }
 }

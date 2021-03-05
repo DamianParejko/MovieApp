@@ -2,23 +2,21 @@
 
 namespace App\Notifications;
 
+use App\Models\LikePost;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class NotificationPostLike extends Notification
 {
     use Queueable;
-    protected $post;
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct($post)
+    
+    protected $likePost;
+    
+    public function __construct(LikePost $likePost)
     {
-        $this->post=$post;
+        $this->likePost = $likePost;
     }
 
     /**
@@ -41,7 +39,7 @@ class NotificationPostLike extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'post' => $this->post,
+            'post' => $this->likePost->post,
             'user' => auth()->user()  
         ];
     }
