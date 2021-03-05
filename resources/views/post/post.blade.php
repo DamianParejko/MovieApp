@@ -23,18 +23,8 @@
                 <p style="max-width: 45vw">{{ $post->content }}</p>
             </div>
             <ul class="list-inline d-sm-flex my-0">
-            
-            @can('like', $post)
-            @if(!$post->likedBy(Auth::user()))
-                @include('like.post_like')
-            @else
-                @include('like.post_deletelike')
-            @endif          
-            @endcan
 
-            @cannot('like', $post)
-                @include('like.count_like')
-            @endcannot
+                @include('like.post_like')    
 
             <li class="list-inline-item ml-auto">
                 <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="{{ route('post.show', ['post'=>$post->id]) }}">
