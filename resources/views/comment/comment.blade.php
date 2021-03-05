@@ -24,7 +24,7 @@
           @endif
           @endcan
 
-          @cannot('like', $post)
+          @cannot('like', $comment)
                 @include('like.count_commentlike')
           @endcannot
 
