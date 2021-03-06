@@ -1,3 +1,8 @@
+<div class='container'>
+@if($message=Session::get('message'))
+<div class='alert alert-success'> {{ $message }}</div>
+@endif
+
 <div class="col-md-8">
     <div class="media g-mb-30 media-comment">
         @if($post->user->image)
@@ -35,4 +40,5 @@
             </ul>  
         </div>
     </div>
+</div>
 </div>

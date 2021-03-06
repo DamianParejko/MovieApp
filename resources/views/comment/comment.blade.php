@@ -16,17 +16,8 @@
             <p style="max-width: 45vw">{{ $comment->comment }}</p>
           </div>
           <ul class="list-inline d-sm-flex my-0">
-          @can('like', $comment)
-           @if(!$comment->likedBy(Auth::user()))
+     
               @include('like.comment_like')
-          @else                
-              @include('like.comment_deletelike')
-          @endif
-          @endcan
-
-          @cannot('like', $comment)
-                @include('like.count_commentlike')
-          @endcannot
 
         </ul>  
       </div>
