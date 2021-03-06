@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Comment;
+use App\Models\LikeComment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -15,11 +15,11 @@ class CommentLikeCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $comment;
+    public $likeComment;
 
-    public function __construct(Comment $comment)
+    public function __construct(LikeComment $likeComment)
     {
-        $this->comment = $comment;
+        $this->likeComment = $likeComment;
     }
 
     /**

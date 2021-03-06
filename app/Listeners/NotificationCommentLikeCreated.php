@@ -18,14 +18,8 @@ class NotificationCommentLikeCreated
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
     public function handle($event)
     {
-        $event->comment->user->notify(new NotificationCommentLike($event->comment));
+        $event->likeComment->comment->user->notify(new NotificationCommentLike($event->likeComment));
     }
 }

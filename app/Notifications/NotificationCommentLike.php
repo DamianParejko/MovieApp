@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Comment;
+use App\Models\LikeComment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,11 +13,11 @@ class NotificationCommentLike extends Notification
 {
     use Queueable;
 
-    protected $comment;
+    protected $likeComment;
 
-    public function __construct(Comment $comment)
+    public function __construct(LikeComment $likeComment)
     {
-        $this->comment = $comment;
+        $this->likeComment = $likeComment;
     }
 
     /**
@@ -39,7 +40,7 @@ class NotificationCommentLike extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'comment' => $this->comment,
+            'comment' => $this->likeComment->comment,
             'user' => auth()->user()
         ];
     }
