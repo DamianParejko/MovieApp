@@ -30,10 +30,6 @@ class Comment extends Model
     public function isAuthor(User $user){
         return $this->user_id === $user->id;
     }
-    
-    public function isNotAuthor(User $user){
-        return $this->user_id != $user->id;
-    }
 
     public function like_comment(){
         return $this->hasMany(LikeComment::class);
@@ -44,7 +40,9 @@ class Comment extends Model
     }
 
     public function hasLike(Comment $comment){
-        return $this->like_comment->where('comment_id', $comment->id)->where('user_id', Auth::user()->id)->count();
+        return $this->like_comment
+            ->where('comment_id', $comment->id)
+            ->where('user_id', Auth::user()->id);
     }
 
     public function commentLikeBy(User $user){
@@ -61,5 +59,11 @@ class Comment extends Model
 
     public function hasNotify(Comment $comment){
         return DatabaseNotification::where('data->id', $comment->id);
+    }
+
+    public function hasNotifyLike(Comment $comment){
+        return DatabaseNotification::where('type', 'App\Notifications\NotificationCommentLike')
+            ->where('data->comment->id', $comment->id)
+            ->where('data->user->id', Auth::user()->id);
     }
 }
