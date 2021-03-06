@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\LikeComment;
-use Illuminate\Http\Request;
-use App\Events\CommentLikeCreated;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\NotificationCommentLike;
+use App\Jobs\CreateCommentLike;
+use App\Jobs\DeleteCommentLike;
+use App\Jobs\CreateCommentDislike;
 
 class LikeCommentController extends Controller
 {
@@ -15,41 +14,27 @@ class LikeCommentController extends Controller
     public function like(Comment $comment)
     {
         $this->authorize('like', $comment);
-    
-        if($comment->hasLike($comment) == 0){
-            
-            $comment->like_comment()->create([
-                'user_id' =>  Auth::user()->id,
-                'comment_id' => $comment->id,
-                'likeable_id' => 1
-            ]);
-        }
-
-        event(new CommentLikeCreated($comment));
         
-        return redirect()->back();
+        $this->dispatchNow(new CreateCommentLike($comment));
+        
+        return redirect()->back()->with('message', 'Zareagowałeś na post');
     }
 
     public function dislike(Comment $comment)
     {
         $this->authorize('like', $comment);
 
-        if($comment->hasLike($comment) == 0){
-            $comment->like_comment()->create([
-                'user_id' => Auth::user()->id,
-                'comment_id' => $comment->id,
-                'likeable_id' => -1
-            ]);
-        }
-        event(new CommentLikeCreated($comment));
+        $this->dispatchNow(new CreateCommentDislike($comment));
         
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Zareagowałeś na post');
     }
 
-    public function destroy(Request $request, Comment $comment)
+    public function destroy(Comment $comment)
     {
-        $request->user()->like_comment()->where('comment_id', $comment->id)->delete();
+        $this->authorize('destroy', $comment);
+
+        $this->dispatchNow(new DeleteCommentLike($comment));
         
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Reakcja usunięta');
     }
 }
